@@ -259,35 +259,35 @@ func! AutoPairsInsert(key)
   endfor
 
   " check close pairs
-  for [open, close, opt] in b:AutoPairsList
-    if close == ''
-      continue
-    end
-    if a:key == g:AutoPairsWildClosedPair || opt['mapclose'] && opt['key'] == a:key
-      " the close pair is in the same line
-      let m = matchstr(afterline, '^\v\s*\V'.close)
-      if m != ''
-        if before =~ '\V'.open.'\v\s*$' && m[0] =~ '\v\s'
-          " remove the space we inserted if the text in pairs is blank
-          return "\<DEL>".s:right(m[1:])
-        else
-          return s:right(m)
-        end
-      end
-      let m = matchstr(after, '^\v\s*\zs\V'.close)
-      if m != ''
-        if a:key == g:AutoPairsWildClosedPair || opt['multiline']
-          if b:autopairs_return_pos == line('.') && getline('.') =~ '\v^\s*$'
-            normal! ddk$
-          end
-          call search(m, 'We')
-          return "\<Right>"
-        else
-          break
-        end
-      end
-    end
-  endfor
+  " for [open, close, opt] in b:AutoPairsList
+  "   if close == ''
+  "     continue
+  "   end
+  "   if a:key == g:AutoPairsWildClosedPair || opt['mapclose'] && opt['key'] == a:key
+  "     " the close pair is in the same line
+  "     let m = matchstr(afterline, '^\v\s*\V'.close)
+  "     if m != ''
+  "       if before =~ '\V'.open.'\v\s*$' && m[0] =~ '\v\s'
+  "         " remove the space we inserted if the text in pairs is blank
+  "         return "\<DEL>".s:right(m[1:])
+  "       else
+  "         return s:right(m)
+  "       end
+  "     end
+  "     let m = matchstr(after, '^\v\s*\zs\V'.close)
+  "     if m != ''
+  "       if a:key == g:AutoPairsWildClosedPair || opt['multiline']
+  "         if b:autopairs_return_pos == line('.') && getline('.') =~ '\v^\s*$'
+  "           normal! ddk$
+  "         end
+  "         call search(m, 'We')
+  "         return "\<Right>"
+  "       else
+  "         break
+  "       end
+  "     end
+  "   end
+  " endfor
 
 
   " Fly Mode, and the key is closed-pairs, search closed-pair and jump
